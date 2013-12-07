@@ -40,6 +40,18 @@ class TestSetTraceFunc < Test::Unit::TestCase
     assert_equal([], events)
   end
 
+
+  def test_read
+    events = []
+    name = "#{self.class}\##{__method__}"
+    eval <<-EOF.gsub(/^.*?: /, ""), nil, name
+     1: x = 1
+     2: y = x
+    EOF
+    assert_equal(["var_read", 2, __method__, self.class],
+                 events.shift)
+  end
+
   def test_call
     events = []
     name = "#{self.class}\##{__method__}"
