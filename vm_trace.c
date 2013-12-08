@@ -539,6 +539,7 @@ get_event_id(rb_event_flag_t event)
 
     switch (event) {
 #define C(name, NAME) case RUBY_EVENT_##NAME: CONST_ID(id, #name); return id;
+	C(variable_read, VARIABLE_READ);
 	C(line, LINE);
 	C(class, CLASS);
 	C(end, END);
